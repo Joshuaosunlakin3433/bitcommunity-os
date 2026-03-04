@@ -1,6 +1,8 @@
 # BitCommunity OS
 
-**BitCommunity OS** is a non-custodial Social-Fi infrastructure layer for the Bitcoin Ecosystem. It enables Discord communities to utilize **sBTC**, **STX** and **SIP-010** tokens for tipping, token-gating, and governance without custodial risk.
+**BitCommunity OS** is the all-in-one Community Management Tool for the Bitcoin Ecosystem. While Stacks is the leading Bitcoin L2, it currently lacks the comprehensive social tooling found on other chains.
+
+We are filling this gap by building the first **Non-Custodial Social-Fi Platform** for Stacks. Starting with Discord, BitCommunity OS enables communities to send **sBTC, STX, and SIP-010 tokens** directly in chat, while also providing **Token Gating** to manage roles based on on-chain holdings. This project provides the essential "Social Layer" infrastructure needed to welcome the next wave of DAOs and users into the Bitcoin economy.
 
 ## 🏗 Architecture
 

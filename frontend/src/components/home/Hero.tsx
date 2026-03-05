@@ -49,7 +49,7 @@ export function Hero() {
 
           {/* Secondary — outlined, orange border on hover */}
           <a
-            href="https://github.com/Joshuaosunlakin3433/bitcommunity-os"
+            href="https://github.com/Joshuaosunlakin3433/bitcommunity-os/blob/main/README.md"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-block px-6 py-4 bg-transparent border border-border-subtle hover:border-btc-orange transition-all duration-200 cursor-pointer"

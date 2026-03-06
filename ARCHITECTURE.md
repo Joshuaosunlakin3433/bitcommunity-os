@@ -157,22 +157,25 @@ enum TipStatus {
 **4. API Specifications (NestJS):**
 The backend exposes a modular REST API to handle off-chain logic and blockchain synchronization.
 
-Auth Module (**/api/auth**)
-**- GET /nonce:** Generates a session nonce for wallet signing.
-**- POST /verify:** Validates SIP-018 signatures to securely link a Stacks Wallet to a Discord ID.
-Tipping Module (**/api/tipping**)
-**- GET /allowance/:userId:** Performs a read-only contract call to check **vault.clar** limits.
-**- POST /execute:**
-        - Validates Sender Balance > Tip Amount.
-        - Validates Allowance > Tip Amount.
-        - Constructs and signs the transaction using the **Operator Hot Wallet** (paying STX gas).
-        - Broadcasts to Stacks Mainnet.
+**Auth Module (`/api/auth`)**
 
+- **GET /nonce:** Generates a session nonce for wallet signing.
+- **POST /verify:** Validates SIP-018 signatures to securely link a Stacks Wallet to a Discord ID.
 
-Webhook Module (**/api/webhooks**)
-**- POST /chainhook:** Ingests signed payloads from Hiro Chainhook.
-        - _ft_transfer_event_: Updates **TokenBalance** cache.
-        - _print_event_: Confirms Tip status and triggers Discord notifications.
+**Tipping Module (`/api/tipping`)**
+
+- **GET /allowance/:userId:** Performs a read-only contract call to check **vault.clar** limits.
+- **POST /execute:**
+    - Validates Sender Balance > Tip Amount.
+    - Validates Allowance > Tip Amount.
+    - Constructs and signs the transaction using the **Operator Hot Wallet** (paying STX gas).
+    - Broadcasts to Stacks Mainnet.
+
+**Webhook Module (`/api/webhooks`)**
+
+- **POST /chainhook:** Ingests signed payloads from Hiro Chainhook.
+    - _ft\_transfer\_event_: Updates **TokenBalance** cache.
+    - _print\_event_: Confirms Tip status and triggers Discord notifications.
 
 
 5. Security Model

@@ -8,7 +8,7 @@
 
 ## 1. System Overview
 
-BitCommunity OS is an Event-Driven, Non-Custodial "Social-Fi" platform designed for the Stacks Blockchain. It bridges off-chain social platforms (Discord) with on-chain assets (sBTC, SIP-010, SIP-009) using a "Vault & Operator" pattern.
+BitCommunity OS is an Event-Driven, Non-Custodial "Social-Fi" platform designed for the Stacks Blockchain. It bridges off-chain social platforms (starting with Discord) with on-chain assets (sBTC, SIP-010, SIP-009) using a "Vault & Operator" pattern.
 
 ### Key constraints:
 *   **Non-Custodial:** The bot never holds user private keys.

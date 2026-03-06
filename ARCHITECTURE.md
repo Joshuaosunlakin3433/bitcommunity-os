@@ -68,9 +68,8 @@ sequenceDiagram
 3. Database Schema (Prisma / PostgreSQL)
 We utilize a relational schema to handle high-concurrency reads for Token Gating. Wallet balances are cached locally and updated via Chainhook events to prevent rate-limiting on the Stacks Node.
 
-// schema.prisma
-
-```datasource db {
+```// schema.prisma
+datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
@@ -155,31 +154,28 @@ enum TipStatus {
 }
 ```
 
-4. API Specifications (NestJS)
+**4. API Specifications (NestJS):**
 The backend exposes a modular REST API to handle off-chain logic and blockchain synchronization.
-Auth Module (/api/auth)
-GET /nonce: Generates a session nonce for wallet signing.
-POST /verify: Validates SIP-018 signatures to securely link a Stacks Wallet to a Discord ID.
-Tipping Module (/api/tipping)
-GET /allowance/:userId: Performs a read-only contract call to check vault.clar limits.
-POST /execute:
-Validates Sender Balance > Tip Amount.
-Validates Allowance > Tip Amount.
-Constructs and signs the transaction using the Operator Hot Wallet (paying STX gas).
-Broadcasts to Stacks Mainnet.
-Webhook Module (/api/webhooks)
-POST /chainhook: Ingests signed payloads from Hiro Chainhook.
-ft_transfer_event: Updates TokenBalance cache.
-print_event: Confirms Tip status and triggers Discord notifications.
+
+Auth Module (**/api/auth**)
+**- GET /nonce:** Generates a session nonce for wallet signing.
+**- POST /verify:** Validates SIP-018 signatures to securely link a Stacks Wallet to a Discord ID.
+Tipping Module (**/api/tipping**)
+**- GET /allowance/:userId:** Performs a read-only contract call to check **vault.clar** limits.
+**- POST /execute:**
+        - Validates Sender Balance > Tip Amount.
+        - Validates Allowance > Tip Amount.
+        - Constructs and signs the transaction using the **Operator Hot Wallet** (paying STX gas).
+        - Broadcasts to Stacks Mainnet.
+
+
+Webhook Module (**/api/webhooks**)
+**- POST /chainhook:** Ingests signed payloads from Hiro Chainhook.
+        - _ft_transfer_event_: Updates **TokenBalance** cache.
+        - _print_event_: Confirms Tip status and triggers Discord notifications.
 
 
 5. Security Model
 Zero Custody: The platform does not hold user funds. Funds sit in the Vault contract or the User's wallet.
 Allowance Pattern: Users must explicitly approve the contract to spend a specific amount. This limits the "blast radius" of any potential compromise to the approved daily limit.
 Operator Isolation: The Bot wallet only holds STX for gas fees. It has no authority to withdraw funds to arbitrary addresses, only to execute transfers between whitelisted users.
-```### Why this file is powerful:
-1.  **GitHub Renders the Diagram:** When the judge scrolls down, they will see that flow chart *drawn* on the screen. It looks incredibly high-effort.
-2.  **It answers "How?":** The grant form answers "What" and "Why." This file answers "How."
-3.  **It validates your "Prototype":** Even if the code is scaffolding, this document proves the *thinking* is finished.
-
-**Create the file, paste the content, push it to GitHub.** You are done. 🏁```

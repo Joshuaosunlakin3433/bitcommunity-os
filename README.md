@@ -1,46 +1,53 @@
 # BitCommunity OS
 
-**BitCommunity OS** is the all-in-one Community Management Tool for the Bitcoin Ecosystem. While Stacks is the leading Bitcoin L2, it currently lacks the comprehensive social tooling found on other chains.
+A non-custodial community operations layer for Stacks and Bitcoin ecosystem Discord servers.
 
-We are filling this gap by building the first **Non-Custodial Social-Fi Platform** for Stacks. Starting with Discord, BitCommunity OS enables communities to send **sBTC, STX, and SIP-010 tokens** directly in chat, while also providing **Token Gating** to manage roles based on on-chain holdings. This project provides the essential "Social Layer" infrastructure needed to welcome the next wave of DAOs and users into the Bitcoin economy.
+**Current status:** Early-stage prototype. Architecture designed, partial Clarity contract work, landing page deployed. Not in production. Currently entering a structured validation phase before further build.
 
-## 🏗 Architecture
+## The problem
 
-BitCommunity OS utilizes a "Vault & Operator" pattern to ensure security:
-1.  **Smart Contracts (Clarity):** Users deposit funds into a non-custodial Vault.
-2.  **Indexing (Hiro Chainhook):** Real-time event streaming for instant UI updates.
-3.  **Backend (NestJS):** An event-driven API that manages "Allowances" and executes gasless transactions on behalf of users.
+Discord communities in the Stacks and broader Bitcoin ecosystem don't have good tooling for community operations using their own ecosystem assets. Existing options are custodial bots, fragmented wallet tools, or nothing at all. There's no clean way for an admin to set up SIP-010 or SIP-009 based role gating, or for members to tip each other in sBTC or STX without friction.
 
-## 🚀 Tech Stack
+## What this aims to be
 
--   **Blockchain:** Stacks
--   **Contracts:** Clarity (SIP-010 Trait Support)
--   **Backend:** NestJS (Node.js) + TypeScript
--   **Database:** PostgreSQL + Prisma ORM
--   **Infrastructure:** Hiro Chainhook
+A community-ops layer that lets:
 
-## 📂 Repository Structure
+- **Members** tip each other in sBTC, STX, or SIP-010 tokens inside Discord without gas friction
+- **Admins** gate channels and roles based on on-chain SIP-010 token or SIP-009 NFT holdings
+- All of it **non-custodial**, executed through Clarity contracts rather than a bot operator holding funds
 
--   `/contracts`: Clarity smart contracts and Clarinet configuration.
--   `/backend`: NestJS API for handling Discord webhooks and Chainhook events.
--   `/frontend`: Next.js dashboard for user wallet management.
--   `/chainhook`: Predicate definitions for the Hiro Indexer.
+Discord is the starting platform. Stacks is the starting chain. Both are deliberate, not permanent.
 
-> **Note on Smart Contracts:**
-> We have included a local copy of `sip-010-trait` in `/contracts` to ensure offline testing reliability and CI/CD isolation during the prototyping phase. In the production mainnet deployment, the contract will utilize `impl-trait` pointing to the canonical mainnet deployment via `clarinet requirements`.
+## Architecture (designed, partially implemented)
 
-## 🗺 Roadmap (Grant Application)
+A "Vault & Operator" pattern:
 
--   **Phase 1:** Smart Contract Development & Security Audits
--   **Phase 2:** NestJS Backend & Chainhook Integration
--   **Phase 3:** Discord Bot Interface & Mainnet Launch
+1. **Smart Contracts (Clarity)** — Users deposit into non-custodial vaults; the operator can only execute pre-authorized actions, never withdraw arbitrarily.
+2. **Indexing (Hiro Chainhook)** — Real-time on-chain event streaming for UI and Discord state updates.
+3. **Backend (NestJS)** — Event-driven API managing allowances, sponsored transactions, and Discord webhook handling.
 
-## 💼 Sustainability & Business Model
+## Planned tech stack
 
-BitCommunity OS is designed to transition from a grant-funded prototype to a self-sustaining SaaS:
-1.  **Open Core:** The smart contracts and bot logic remain open-source.
-2.  **Hosted Pro Tier:** We offer a managed version ($30/mo) for communities that require 99.9% uptime and managed Chainhook infrastructure, ensuring the project covers its own OpEx within 12 months.
+- **Blockchain:** Stacks
+- **Contracts:** Clarity (SIP-010 trait support)
+- **Backend:** NestJS + TypeScript
+- **Database:** PostgreSQL + Prisma ORM
+- **Indexer:** Hiro Chainhook
+- **Frontend:** Next.js
 
-## 📄 License
+## Repository structure
 
-Open Source (MIT) - *Building Public Goods for the Stacks Ecosystem.*
+- `/contracts` — Clarity smart contracts and Clarinet config
+- `/backend` — NestJS API (scaffolded)
+- `/frontend` — Next.js dashboard (scaffolded)
+- `/chainhook` — Predicate definitions for the Hiro indexer
+
+> **Note on smart contracts:** A local copy of `sip-010-trait` is included in `/contracts` for offline testing during prototyping. Production deployment will use `impl-trait` pointing to the canonical mainnet trait via `clarinet requirements`.
+
+## Where this is going
+
+The next phase is structured user validation — interviewing Stacks and Bitcoin ecosystem Discord admins and active members to test whether the assumed gap is real, whether the proposed solution fits, and whether to keep building, pivot, or shelve. Build work resumes after that signal exists, not before.
+
+## License
+
+MIT.
